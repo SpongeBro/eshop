@@ -1,0 +1,121 @@
+<h1>Registrační formulář</h1>
+<form method="post" action="account/register" id="register-form" class="container col-md-5">
+    <div class="form-floating">        
+        <input type="text" 
+               id="username"
+               name="username" 
+               class="form-control"
+               placeholder="Uživatelské jméno"
+               required
+               value="<?php if(isset($_POST["username"])) echo (htmlspecialchars($_POST["username"])); ?>">
+        <label for="username" style="<?php if(isset($msg_user_exists)) echo("color:red"); ?>">
+            <?php if(isset($msg_user_exists)) echo ($msg_user_exists); else echo("Uživatelské jméno"); ?></label>
+    </div><br>
+    <div class="row">
+    <div class="form-floating col-md-6">        
+        <input type="password"
+               id="password"
+               name="password"
+               class="form-control"
+               pattern=".{8,}" title="Heslo musí mít alespoň 8 znaků, jedno velké a jedno malé písmeno a jednu číslici."
+               placeholder="Heslo"
+               required>   
+        <label for="password" style="<?php if(isset($msg_pass_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_pass_invalid)) echo ($msg_pass_invalid); else echo ("Heslo"); ?></label>
+    </div>
+    <div class="form-floating col-md-6">        
+        <input type="password"
+               id="password_again"
+               name="password_again"
+               class="form-control"
+               pattern=".{8,}" title="Heslo musí mít alespoň 8 znaků, jedno velké a jedno malé písmeno a jednu číslici."
+               placeholder="Heslo znovu"
+               required>   
+        <label for="password_again" style="<?php if(isset($msg_pass_notmatch)) echo("color:red"); ?>">
+            <?php if(isset($msg_pass_notmatch)) echo ($msg_pass_notmatch); else echo ("Heslo znovu"); ?></label>
+    </div></div><br>
+    <div class="row">
+    <div class="form-floating col-md-6">
+        <input type="text"
+               name="name"
+               id="name"
+               class="form-control"
+               placeholder="Jméno"
+               required
+               value="<?php if(isset($_POST["name"])) echo (htmlspecialchars($_POST["name"])); ?>">
+        <label for="name" style="<?php if(isset($msg_name_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_name_invalid)) echo ($msg_name_invalid); else echo ("Jméno"); ?></label>
+    </div>
+    <div class="form-floating col-md-6">                
+        <input type="text"
+               name="surname"
+               id="surname"
+               class="form-control"
+               placeholder="Příjmení"
+               required
+               value="<?php if(isset($_POST["surname"])) echo (htmlspecialchars($_POST["surname"])); ?>">
+        <label for="surname" style="<?php if(isset($msg_surname_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_surname_invalid)) echo ($msg_surname_invalid); else echo ("Příjmení"); ?></label>
+    </div></div><br>
+    <div class="form-floating">
+        <input type="email"
+               name="email"
+               id="email"
+               class="form-control"
+               placeholder="E-mail"
+               title="example@example(.com)|(.cz)"
+               required
+               value="<?php if(isset($_POST["email"])) echo (htmlspecialchars($_POST["email"])); ?>">    
+        <label for="email" style="<?php if(isset($msg_email_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_email_invalid)) echo ($msg_email_invalid); else echo ("E-mail"); ?></label>
+    </div><br>
+    <div class="row"> 
+    <div class="form-floating col-md-5">
+        <input type="text"
+               name="address"
+               id="address"
+               class="form-control"
+               placeholder="Ulice a č.p."
+               required
+               value="<?php if(isset($_POST["address"])) echo (htmlspecialchars($_POST["address"])); ?>">
+        <label for="address">Ulice a č.p.</label>
+    </div>
+    <div class="form-floating col-md-4">
+        <input type="text"
+               name="city"
+               id="city"
+               class="form-control"
+               placeholder="Město"
+               required
+               value="<?php if(isset($_POST["city"])) echo (htmlspecialchars($_POST["city"])); ?>">
+        <label for="city">Město</label>
+    </div>
+        <div class="form-floating col-md-3">
+        <input type="text"
+               name="psc"
+               id="psc"
+               class="form-control"
+               pattern="[0-9]{5}" title="Formát: 12300"
+               placeholder="PSČ"
+               required
+               value="<?php if(isset($_POST["psc"])) echo (htmlspecialchars($_POST["psc"])); ?>">
+        <label for="psc" style="<?php if(isset($msg_psc_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_psc_invalid)) echo ($msg_psc_invalid); else echo ("PSČ"); ?></label>
+    </div></div><br>
+    <div class="form-floating">
+        <input type="tel"
+               name="phone"
+               id="phone"
+               class="form-control"
+               pattern="([0-9]{3}[0-9]{3}[0-9]{3})" title="Formát: (+420)123456789"
+               placeholder="Telefon"
+               required
+               value="<?php if(isset($_POST["phone"])) echo (htmlspecialchars($_POST["phone"])); ?>">  
+        <label for="phone" style="<?php if(isset($msg_phone_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_phone_invalid)) echo ($msg_phone_invalid); else echo ("Telefon"); ?></label>
+    </div><br>
+    <div><input type="checkbox" id="checkCon" name="checkCon" required> Souhlasím se 
+        <a href="contact/personal">zásadou ochrany osobních údajů</a>
+         a <a href="contact/terms">obchodních podmínkách</a>.</div><br>
+    <input class="button-medium" type="submit" value="Potvrdit">
+</form>

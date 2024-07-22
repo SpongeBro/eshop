@@ -1,0 +1,31 @@
+<form method="post" id="loginForm" class="container col-md-3" action="account/login">
+    <div class="form-floating">
+    <input type="text" 
+        name="username" 
+        id="username" 
+        class="form-control"
+        placeholder="Uživatelské jméno"
+        value="<?php if(isset($_POST["username"])) echo (htmlspecialchars($_POST["username"])); ?>"
+        required>
+    <label for="username">Uživatelské jméno</label>
+    </div><br>
+    <div class="form-floating">
+    <input type="password"
+        name="password"
+        id="password"
+        class="form-control"
+        placeholder="Heslo"
+        required>
+    <label for="password">Heslo</label>    
+    </div>
+    <div>
+    <!--<a href="account/forgot" style="float:right;">Zapomenuté heslo</a>-->
+    <?php if(isset($logged)): ?>
+    <div style="color: red;">Chybné údaje</div> 
+    <?php endif; ?>
+    </div>
+    <div class="clear" style="padding-top: 1.2em;">
+    <button type="submit" id="loginBtn" class="button">Přihlásit se</button>
+    <a href="account/register" class="button" id="registerBtn">Registrace</a>   
+    </div>
+</form> 

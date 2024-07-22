@@ -1,0 +1,102 @@
+<div class="container" id="account">
+    <?php if(!isset($_GET["e"]) && !isset($_POST["delivery_edit"])): ?>
+    <div class="col-md-3" style="float:left;">
+<?= $_SESSION["user"]["name"] ?> <?= $_SESSION["user"]["surname"] ?>
+<ul>
+    <li><a href="account">Objednávky</a></li>
+    <li><a href="account?p=2">Úprava osobních údajů</a></li>
+    <li><a href="account?p=3">Změna hesla</a></li>
+    <li><a href="account?p=4" onclick="return confirm('Přejete si smazat účet? (akci nelze vrátit)')">Smazat účet</a></li>
+</ul>
+    </div>
+    <?php endif; ?>
+    <div class="profilePanel">
+
+<form method="post" action="account/edit" id="edit-form" class="container col-md-5">
+    <div class="row">
+    <div class="form-floating col-md-6">
+        <input type="text"
+               name="name"
+               id="name"
+               class="form-control"
+               placeholder="Jméno"
+               required
+               value="<?php if(isset($_POST["name"])) echo(htmlspecialchars($_POST["name"])); else echo ($_SESSION["user"]["name"]); ?>">
+        <label for="name" style="<?php if(isset($msg_name_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_name_invalid)) echo ($msg_name_invalid); else echo ("Jméno"); ?></label>
+    </div>
+    <div class="form-floating col-md-6">                
+        <input type="text"
+               name="surname"
+               id="surname"
+               class="form-control"
+               placeholder="Příjmení"
+               required
+               value="<?php if(isset($_POST["surname"])) echo(htmlspecialchars($_POST["surname"])); else echo ($_SESSION["user"]["surname"]); ?>">
+        <label for="surname" style="<?php if(isset($msg_surname_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_surname_invalid)) echo ($msg_surname_invalid); else echo ("Příjmení"); ?></label>
+    </div></div><br>
+    <div class="form-floating">
+        <input type="email"
+               name="email"
+               id="email"
+               class="form-control"
+               placeholder="E-mail"
+               title="example@example(.com)|(.cz)"
+               required
+               value="<?php if(isset($_POST["email"])) echo(htmlspecialchars($_POST["email"])); else echo($_SESSION["user"]["email"]); ?>">    
+        <label for="email" style="<?php if(isset($msg_email_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_email_invalid)) echo ($msg_email_invalid); else echo ("E-mail"); ?></label>
+    </div><br>
+    <div class="row"> 
+    <div class="form-floating col-md-5">
+        <input type="text"
+               name="address"
+               id="address"
+               class="form-control"
+               placeholder="Ulice a č.p."
+               required
+               value="<?php if(isset($_POST["address"])) echo(htmlspecialchars($_POST["address"])); else echo ($_SESSION["user"]["address"]); ?>">
+        <label for="address">Ulice a č.p.</label>
+    </div>
+    <div class="form-floating col-md-4">
+        <input type="text"
+               name="city"
+               id="city"
+               class="form-control"
+               placeholder="Město"
+               required
+               value="<?php if(isset($_POST["city"])) echo(htmlspecialchars($_POST["city"])); else echo ($_SESSION["user"]["city"]); ?>">
+        <label for="city">Město</label>
+    </div>
+        <div class="form-floating col-md-3">
+        <input type="text"
+               name="psc"
+               id="psc"
+               class="form-control"
+               pattern="[0-9]{5}" title="Formát: 12300"
+               placeholder="PSČ"
+               required
+               value="<?php if(isset($_POST["psc"])) echo(htmlspecialchars($_POST["psc"])); else echo ($_SESSION["user"]["psc"]); ?>">
+        <label for="psc" style="<?php if(isset($msg_psc_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_psc_invalid)) echo ($msg_psc_invalid); else echo ("PSČ"); ?></label>
+    </div></div><br>
+    <div class="form-floating">
+        <input type="tel"
+               name="phone"
+               id="phone"
+               class="form-control"
+               pattern="([0-9]{3}[0-9]{3}[0-9]{3})" title="Formát: (+420)123456789"
+               placeholder="Telefon"
+               required
+               value="<?php if(isset($_POST["phone"])) echo(htmlspecialchars($_POST["phone"])); else echo ($_SESSION["user"]["phone"]); ?>">  
+        <label for="phone" style="<?php if(isset($msg_phone_invalid)) echo("color:red"); ?>">
+            <?php if(isset($msg_phone_invalid)) echo ($msg_phone_invalid); else echo ("Telefon"); ?></label>
+    </div><br>
+    <?php if (isset($_GET["e"]) || isset($_POST["delivery_edit"])): ?>
+    <input type="hidden" name="delivery_edit" value="true">
+    <?php endif; ?>
+    <input class="button-medium" type="submit" value="Uložit">
+</form>
+</div>
+</div>

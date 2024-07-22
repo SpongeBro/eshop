@@ -1,0 +1,125 @@
+<?php if(isset($_SESSION["user"]) && $_SESSION["user"]["role"] == "admin"): ?>
+<div class="row" style="margin-left: -8%; margin-right: -8%;">
+<div><a style="margin-top: 7.5em;" id="adminMenu" class="button_big" href="admin">← Zpět</a></div>
+<form method="post" action="admin/manageProduct" enctype="multipart/form-data" class="container col-md-4">
+    <div class="form-floating">        
+        <input type="text" 
+               id="name"
+               name="name" 
+               class="form-control"
+               placeholder="Název produktu"
+               required
+               value="<?= $edit ? $game["name"] : '' ?>">
+        <label for="name">Název produktu</label>
+    </div><br>
+    <div class="form-floating">        
+        <input type="text" 
+               id="url"
+               name="url" 
+               class="form-control"
+               placeholder="URL produktu"
+               required
+               value="<?= $edit ? $game["url"] : '' ?>">
+        <label for="url">URL produktu</label>
+    </div><br>
+    
+        <div class="form-floating">        
+        <select name="idPlatform"
+                id="idPlatform"
+                class="form-control"
+                placeholder="Platforma"
+                required>
+            <?php foreach($platforms as $p): ?>  
+            
+            <?php if ($p["idPlatform"] == $game["idPlatform"]): ?>
+            <option value="<?= $p["idPlatform"] ?>"
+                    selected>
+                    <?= $p["platformType"] ?></option>
+            
+            <?php else: ?>
+            <option value="<?= $p["idPlatform"] ?>">
+                    <?= $p["platformType"] ?></option>
+            
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </select>
+        <label for="idPlatform">Platforma</label>
+        </div><br>
+    <div class="form-floating">        
+        <input type="text" 
+               id="genre"
+               name="genre" 
+               class="form-control"
+               placeholder="Žánr"
+               required
+               value="<?= $edit ? $game["genre"] : '' ?>">
+        <label for="genre">Žánr</label>
+    </div><br>
+    <div class="form-floating">        
+        <input type="text" 
+               id="game_type"
+               name="game_type" 
+               class="form-control"
+               placeholder="Typ hry"
+               required
+               value="<?= $edit ? $game["game_type"] : '' ?>">
+        <label for="game_type">Typ hry</label>
+    </div><br>
+    <div class="form-floating">        
+        <input type="number" 
+               id="price"
+               name="price" 
+               class="form-control"
+               placeholder="Cena"
+               required
+               min="1"
+               value="<?= $edit ? $game["price"] : '' ?>">
+        <label for="price">Cena</label>
+    </div><br>
+    <div class="form-floating">        
+        <input type="number" 
+               id="stock"
+               name="stock" 
+               class="form-control"
+               placeholder="Skladem"
+               required
+               min="0"
+               value="<?= $edit ? $game["stock"] : '' ?>">
+        <label for="stock">Skladem</label>
+    </div><br>
+    <div class="form-group">        
+        <textarea id="description"
+               name="description" 
+               class="form-control"
+               rows="5"
+               placeholder="Popis"
+               ><?= $edit ? $game["description"] : '' ?></textarea>
+    </div><br>
+    <div class="form-floating">                    
+        <input type="file"
+               style="height: 4em; padding-top:2em; padding-left: 1.2em;"
+               class="form-control"
+               id="image"
+               name="image"
+               <?php if(!$edit) echo "required"?>
+               accept="image/jpeg, image/png"
+               placeholder="Titulní obrázek">
+        <label for="image">Titulní obrázek</label>
+    </div><br>       
+    <?php if ($edit): ?>
+    <!--<a class="button" style="float:left; height: 45px; width: 90px; padding:10px; padding-left: 15px;" href="admin/remove/GAMEURL">Odebrat</a>-->
+        <input type="hidden"
+            name="action"
+            value="update">
+        <input type="hidden"
+            name="idProduct"
+            value="<?= $game["idProduct"] ?>">
+    <?php else: ?>
+        <input type="hidden"
+            name="action"
+            value="create">
+    <?php endif; ?>
+    <input style="float:right; height:45px; width: 90px; border-radius: 5px;" type="submit" value="Uložit">
+</form>
+</div>
+<?php endif; ?>

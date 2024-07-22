@@ -1,0 +1,33 @@
+<h1>Kontaktní formulář</h1>
+<form method="post" id="form-contact" class="container col-md-6">
+    <div class="form-group">
+    <input type="text" 
+           class="form-control"
+           name="contact-name" 
+           placeholder="Zadejte jméno" 
+           required><br>
+    </div>
+    <div class="form-group">
+    <input type="email" 
+           class="form-control"
+           name="contact-email" 
+           placeholder="Zadejte email" 
+           required><br>
+    </div>
+    <div class="form-group">
+    <input type="text" 
+           class="form-control"
+           name="contact-subject" 
+           placeholder="Předmět" 
+           required><br>
+    </div>
+    <div class="form-group">
+    <textarea name="contact-msg" 
+              class="form-control"
+              rows="4" 
+              cols="50" 
+              placeholder="Vaše zpráva" 
+              required></textarea><br>
+    </div>
+    <input class="button-medium" type="submit" value="Odeslat">
+</form>

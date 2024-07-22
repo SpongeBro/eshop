@@ -1,0 +1,40 @@
+<div id="cart">
+    <?php if($cart["amount_sum"] > 0): ?>
+    <h1>Košík</h1>
+    <table id="tableProducts">
+        <tr>
+            <th></th>
+            <th>Název</th>
+            <th>Platforma</th>
+            <th>Množství</th>
+            <th>Cena (bez DPH)</th>
+            <th>Cena</th>         
+            <th></th>
+        </tr>
+    <?php foreach ($products as $value) : ?>
+        <tr>
+            <td><a href="product/<?= $value["url"] ?>"><img src="imgs/<?= $value["image"]?>" alt="<?= $value["image"] ?>" width="100" height="130"></a></td>
+            <td><?= $value["name"] ?></td>       
+            <td><?= $value["platform"] ?></td>
+            <td><?= $value["amount"] ?></td>
+            <td><?= $value["price"] ?>,- Kč</td>
+            <td><?= $value["price_dph"] ?>,- Kč</td>
+            <td><a href="cart/remove/<?= $value["url"] ?>"><img id="removeIcon" src="imgs/icons/remove.png" alt="remove"></a></td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+    <div id="cartInfo">
+        <p style="font-size: 0.9em;">Počet položek: <?= $cart["amount_sum"] ?></p>
+        <p>Cena celkem: <?= $cart["price_sum"] ?>,- Kč s DPH</p>
+    </div>
+    <div id="cartButton">
+        <?php if (isset($_SESSION["user"])) : ?>
+        <a href="cart?sum" class="button">Pokračovat v objednávce →</a>
+        <?php else: ?>
+        <a href="account/login" class="button">Přihlásit se</a>
+        <?php endif; ?>    
+    </div>
+    <?php else : ?>
+    <h2>Košík je prázdný</h2>
+    <?php endif; ?>
+</div>

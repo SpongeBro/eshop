@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/localhost">
+        <title><?= $title ?></title>
+        <meta charset="UTF-8">
+        <meta name="description" content="<?= $description ?>">
+        <meta name="keywords" content="<?= $keywords ?>">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">              
+        <link href="Styles/bootstrap-5.2.3-dist/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="Styles/bootstrap-5.2.3-dist/css/bootstrap-grid.css" rel="stylesheet" type="text/css"/>
+        <link href="Styles/style.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div id="topDiv" class="container">
+            <div class="row">
+            <div id="logoDiv" class="col-md-2">
+                <a href="home"><img id=logo src="imgs/logo3.png" alt="logo" title="logo"></a>
+            </div>
+            
+            <div id="searchDiv" class="col-md-6">
+                <form action="home/find" method="post" class="container">
+                <input style="height:40px; padding:10px;" type="text" name="search_word" id="search_bar" placeholder="Zadejte název">
+                <button style="height:40px;" type="submit" class="button">Vyhledat</button>
+                </form>
+            </div>
+            <div id="profileDiv" class="col-md-4">
+                <div style="margin-bottom:10px;">
+                <?php if(isset($_SESSION["user"])): ?>
+                <span>Přihlášen: <?= $_SESSION["user"]["username"] ?></span>
+                <a href="account/logout">Odhlásit se</a>  
+                <?php if($_SESSION["user"]["role"] == "admin"): ?>
+                <a href="admin">Správa</a>
+                <?php endif; ?>
+                <?php endif; ?>   
+                </div>
+                <div>
+                <a href="account"><img id="profileIcon" src="imgs/icons/profile.png" alt="profil"></a>
+                <a href="cart" style="position:relative;"><img id=cartIcon src="imgs/icons/cart.png" alt="cart"></a>
+                <span class="badge badge-warning" id="lblCartCount"><?= $cartInfo["amount_sum"] ?></span>
+                <?php if($cartInfo["price_sum"] > 0): ?>
+                <span class="badge badge-warning" id="lblCartPrice"><?= $cartInfo["price_sum"] ?> Kč</span>
+                <?php endif; ?>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div id="content">
+            <?= $this->controller->render(); ?>           
+        </div>       
+        <div class="clear"></div>
+    </body>
+        <footer>
+            <hr>
+            <div style="text-align:center;  margin-bottom:10px; opacity: 80%;">
+                 <a style="color:white;" href="contact">Kontakt</a> |
+                 <a style="color:white;" href="contact/personal">Ochrana osobních údajů</a> |
+                 <a style="color:white;" href="contact/terms">Obchodní podmínky</a>
+            </div>
+            <p style="text-align: center;">&copy; Planet of Games (2022 - <?= (date("Y")) ?>)</p>
+        </footer>
+</html>
+

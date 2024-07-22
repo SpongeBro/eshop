@@ -1,0 +1,63 @@
+<?php if (isset($_SESSION["user"]) && $_SESSION["user"]["role"] == "admin"): ?>
+<div id="orderDetail">
+<form method="post" action="admin/changeStatus">
+    <div class="form-floating col-md-3" style="margin-top: 15px;">
+    <select name="status"
+                id="status"
+                class="form-control"
+                placeholder="Status"
+                required>
+    <?php foreach($status as $s): ?>  
+    <?php if ($s == $order["status"]): ?>
+    <option value="<?= $s ?>"
+            selected>
+            <?= $s ?></option>  
+    <?php else: ?>
+    <option value="<?= $s ?>">
+            <?= $s ?></option>    
+    <?php endif; ?>
+    <?php endforeach; ?>
+    </select>
+    <label for="status">Status</label>     
+    <input style="float:right; margin-top: 5px; height:45px; width: 90px; border-radius: 5px;" type="submit" value="Uložit">
+    </div>
+    <input type="hidden" name="idOrder" value="<?= $order["idOrder"]?>">
+</form>
+    <div class="clear"></div>
+<hr>
+Číslo: <?= $order["idOrder"] ?><br>
+Datum: <?= $order["created_at"] ?><br>
+<?php if (isset($order["name"])): ?>
+Jméno: <?= $order["name"] ?> <?= $order["surname"] ?><br>
+Telefon: <?= $order["phone"] ?><br>
+E-mail: <?= $order["email"] ?><br>
+<?php else: ?>
+<strong style="color:red;">UŽIVATEL JIŽ NENÍ V DATABÁZI ZAREGISTROVÁN</strong><br>
+<?php endif; ?>
+<?= $order["address"] ?><br>
+Doprava: <?= $order["transport"] ?><br>
+Platba: <?= $order["payment"] ?><br>
+Cena celkem: <?= $order["price_sum"] ?>,- Kč<br>
+<table>
+    <tr>
+        <th></th>
+        <th>Název</th>
+        <th>Platforma</th>
+        <th>Množství</th>
+        <th>Cena (bez DPH)</th>
+        <th>Cena</th>
+    </tr>
+    <?php foreach($products as $value): ?>
+    <tr>
+        <td><img src="imgs/<?= $value["image"]?>" alt="<?= $value["image"] ?>" width="50" height="80"></td>
+        <td><?= $value["name"] ?></td>       
+        <td><?= $value["platform"] ?></td>
+        <td><?= $value["amount"] ?></td>
+        <td><?= $value["price"] ?>,- Kč</td>
+        <td><?= $value["price_dph"] ?>,- Kč</td>
+    </tr>
+    <?php endforeach;?>
+</table>
+</div>
+<div><a id="adminMenu" class="button_big" href="admin">← Zpět</a></div>
+<?php endif; ?>

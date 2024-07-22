@@ -1,0 +1,69 @@
+<div id="platformDiv" class="container col-md-12">
+    <div class="row">
+        <a class="col-md-3" href="home/PC">PC</a>
+        <a class="col-md-3" href="home/XBOX">XBOX</a>
+        <a class="col-md-3" href="home/PLAYSTATION">PLAYSTATION</a>
+        <a class="col-md-3" href="home/SWITCH">SWITCH</a>
+    </div>
+</div>  
+<div id="selectedPlatformDiv" class="container">
+            <div class="row" style="margin-left:5px;">
+            <?php if (isset($categories)): ?>
+            <nav id="categories" class="col-md-2">
+                <!-- MAX PRICE INPUT -->
+                <form id="priceForm" method="post" 
+                      action="home/<?php if(isset($p)) echo $p; else if (isset($g)) echo $g; ?>">                    
+                    <label for="priceMax">Max. cena:&nbsp;</label>
+                    <output><?php if(isset($price)) echo $price; else echo "500"; ?></output>
+                    <input type="range"
+                           id="priceMax"
+                           name="priceMax"
+                           min="500"
+                           max="3000"
+                           step="500"
+                           value="<?php if(isset($price)) echo $price; else echo "500"; ?>"
+                           oninput="this.previousElementSibling.value = this.value"
+                           onmouseup="document.getElementById('priceForm').submit();">       
+                </form>
+                <?php foreach($categories as $value): ?>
+                <div><a href="home/<?= $value["url"] ?>"><?= $value["genre"] ?></a></div><br>                               
+                <?php endforeach; ?>
+            </nav>
+            <?php endif; ?>
+            <div id="productsDiv" class="col-md-10">
+                <div class="row">
+                    <?php if ($games): ?>
+                    <?php foreach ($games as $value): ?>
+                        <div id="singleProduct" class="col-md-4">                        
+                        <div id="productImg"><a href="product/<?= $value["url"] ?>">
+                                <img src="imgs/<?= $value["image"] ?>" alt="<?= $value["image"] ?>"
+                                     width="100" height="130"></a></div>
+                        <div><strong><?= $value["name"] ?> (<?= $value["platform"] ?>)</strong></div>
+                        <div><!--Žánr: --><?= $value["genre"] ?></div>
+                        <div><!--Typ hry: --><?= $value["game_type"] ?></div>
+                        <?php if($value["stock"] > 1 && $value["stock"] > 10): ?>
+                        <div style="color:green">Skladem (>10ks)</div>
+                        <?php elseif ($value["stock"] > 0): ?>
+                        <div style="color:green">Skladem (<?= $value["stock"] ?>ks)</div>
+                        <?php else: ?>
+                        <div style="color:red">Není skladem</div>
+                        <?php endif;?>
+                        <div><!--Cena: --><?= $value["price_dph"] ?>,- Kč</div>
+                        <!--<div>(bez DPH: <?= $value["price"] ?>,- Kč)</div>-->                        
+                        <div>
+                            <?php if($value["stock"] > 0): ?> 
+                                <a href="cart/add/<?= $value["url"] ?><?php if(isset($p)) echo '?p='.$p; else if (isset($g)) echo '?p='.$g; ?>" 
+                                   class="button" id="buyButton">Koupit</a>
+                            <?php endif; ?>
+                            <a href="product/<?= $value["url"] ?>">Více</a></div>
+                        </div>
+                    <?php endforeach; ?>                      
+                    <?php elseif (isset($categories)): ?>
+                    <div style="text-align:center;"><h2 style="margin-bottom: 1em; margin-top: 6em; margin-right: 6em;">Produkt nenalezen</h2></div>
+                    <?php else: ?>
+                    <div style="text-align:center;"><h2 style="margin-bottom: 1em; margin-top: 2em; margin-left: 2em;">Produkt nenalezen</h2></div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            </div>
+        </div>

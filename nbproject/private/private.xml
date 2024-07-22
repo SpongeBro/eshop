@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/Views/Cart/index2.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Contact/terms.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/ProductController.php</file>
+            <file>file:/C:/xampp/htdocs/Models/AccountManager.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Admin/adminOrder.phtml</file>
+            <file>file:/C:/xampp/htdocs/index.php</file>
+            <file>file:/C:/xampp/htdocs/Views/404.phtml</file>
+            <file>file:/C:/xampp/htdocs/Models/ProductManager.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/register.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Contact/contact.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/RouterController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/login.phtml</file>
+            <file>file:/C:/xampp/htdocs/Models/CartManager.php</file>
+            <file>file:/C:/xampp/htdocs/Controllers/CartController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/detail.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/AccountController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Admin/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/AdminController.php</file>
+            <file>file:/C:/xampp/htdocs/Models/Product.php</file>
+            <file>file:/C:/xampp/htdocs/Styles/style.css</file>
+            <file>file:/C:/xampp/htdocs/Models/Cart.php</file>
+            <file>file:/C:/xampp/htdocs/Models/Payment.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/password.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/SearchController.php</file>
+            <file>file:/C:/xampp/htdocs/Controllers/Controller.php</file>
+            <file>file:/C:/xampp/htdocs/Models/Database.php</file>
+            <file>file:/C:/xampp/htdocs/Models/CommentManager.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Contact/personal.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/HomeController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Cart/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/orderdetail.phtml</file>
+            <file>file:/C:/xampp/htdocs/Models/CategoryManager.php</file>
+            <file>file:/C:/xampp/htdocs/Models/MailSender.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Admin/adminProduct.phtml</file>
+            <file>file:/C:/xampp/htdocs/Controllers/ErrorController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Home/catalogue.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/layout.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Account/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Home/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/Views/Product/index.phtml</file>
+            <file>file:/C:/xampp/htdocs/Models/OrderManager.php</file>
+            <file>file:/C:/xampp/htdocs/Controllers/ContactController.php</file>
+            <file>file:/C:/xampp/htdocs/Views/Cart/success.phtml</file>
+        </group>
+    </open-files>
+</project-private>

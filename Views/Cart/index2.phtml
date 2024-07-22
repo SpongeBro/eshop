@@ -1,0 +1,81 @@
+<div id="step2">
+    <?php if (isset($_SESSION["user"])): ?>   
+    <form method="post" action="cart/order">
+    <h2 style="text-align:left; margin-left:1em;">Dodací údaje</h2>
+    <div style="float:left;" id="delivery_user" class="col-md-3">        
+        <div>Jméno a příjmení: <?= $_SESSION["user"]["name"] ?> <?= $_SESSION["user"]["surname"] ?></div><br>        
+        <div>Telefon: <?= $_SESSION["user"]["phone"] ?></div><br>
+        <div>E-mail: <?= $_SESSION["user"]["email"] ?></div><br>
+        <div>Ulice: <?= $_SESSION["user"]["address"] ?></div><br>
+        <div>Město: <?= $_SESSION["user"]["city"] ?></div><br>
+        <div>PSČ: <?= $_SESSION["user"]["psc"] ?></div><br>        
+        <a style="float:right;" href="account?p=2&e">Upravit</a>
+    </div>
+    <div id="delivery" class="col-md-5">
+    <div id="delivery_payment">
+        <h2 style="margin-left:-1em; margin-top: -2.4em; float:left;">Způsob platby</h2>   
+        <input onclick="changePayment(this.value);" type="radio" name="payment" value="Na dobírku" checked="checked"> Na dobírku
+        <div style="float:right;">Bez poplatku</div><br>
+        <div>&nbsp;</div>
+        <input onclick="changePayment(this.value);" type="radio" name="payment" value="Bankovním převodem"> Bankovním převodem
+        <div style="float:right;">Bez poplatku</div><br>        
+    </div>
+    <div id="delivery_transport">
+        <h2 style="margin-left:-1em; margin-top: -2.3em; float:left;">Způsob dopravy</h2> 
+        <input onclick="changeTransport(this.value);" type="radio" name="transport" value="Osobní odběr" checked="checked"> Osobní odběr | <small>Ostrava</small>
+        <div style="float:right;">Bez poplatku</div><br>          
+        <div>&nbsp;</div>
+        <input onclick="changeTransport(this.value);" type="radio" name="transport" value="Česká pošta"> Česká pošta
+        <div style="float:right;"><?= Payment::$post; ?> Kč s DPH</div><br>
+        <div>&nbsp;</div>
+        <input onclick="changeTransport(this.value);" type="radio" name="transport" value="Kurýr"> Kurýr
+        <div style="float:right;"><?= Payment::$courier; ?> Kč s DPH</div><br>
+    </div>
+    </div>
+    <div id="cartProducts" class="col-md-3">
+        <h2 style="margin-top: -2.2em; float:left; margin-left: -0.9em;"><img style="margin-right:0.5em;" id=cartIcon src="imgs/icons/cart.png" alt="cart">Váš košík</h2>        
+        <?php foreach($products as $value): ?>
+        <div><?= $value["amount"] ?>x <a href="product/<?= $value["url"] ?>"><?= $value["name"] ?></a> (<?= $value["platform"]?>)</div>
+        <div>Skladem <?= $value["stock"] ?>ks</div>  
+        <div style="float:right;"><?= $value["price_dph"] * $value["amount"] ?> Kč s DPH</div><br>
+        <?php endforeach; ?>
+        <br>
+        <strong style="float:left;">Platba:</strong>
+        <div id="payment_op">Na dobírku</div>
+        <div id="payment_price" style="float:right;">Bez poplatku</div><br>
+        <strong style="float:left;">Doprava:</strong>
+        <div id="transport_op">Osobní odběr</div>
+        <div id="transport_price" style="float:right;">Bez poplatku</div><br>
+        <hr>
+        <strong>Cena celkem:</strong> <strong id="sum_price" style="float:right;"><?= $cart["price_sum"] ?> Kč s DPH</strong>
+    </div>  
+    <div style="margin-bottom: 2em;" class="clear"></div>
+    <a style="height:50px; margin-left:2em; padding-top:0.7em; width:80px; text-align:center;" class="button" href="cart">← Zpět</a>
+    <input style="float:right; margin-right: 26.1%; height:50px;" type="submit" value="Odeslat objednávku →">
+    </form>    
+    <?php endif; ?>
+</div>
+<script>
+    function changeTransport(value)
+    {       
+        var price = 0;
+        if (value == "Česká pošta")
+            price = <?= Payment::$post ?>;
+        else if (value == "Kurýr")
+            price = <?= Payment::$courier ?>;
+        
+        //change delivery info
+        if (price == 0) document.getElementById("transport_price").innerHTML = "Bez poplatku";
+        else document.getElementById("transport_price").innerHTML = price + " Kč s DPH";
+        document.getElementById("transport_op").innerHTML = value;
+        
+        //get delivery cost and add it to sum price
+        var sum_price = <?= $cart["price_sum"] ?>;      
+        sum_price += price;
+        document.getElementById("sum_price").innerHTML = sum_price + " Kč s DPH";    
+    }
+    function changePayment(value)
+    {
+        document.getElementById("payment_op").innerHTML = value;
+    }
+</script>

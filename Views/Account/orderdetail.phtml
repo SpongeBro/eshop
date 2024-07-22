@@ -1,0 +1,51 @@
+<div class="container" id="account">
+    <div class="col-md-3" style="float:left;">
+<?= $_SESSION["user"]["name"] ?> <?= $_SESSION["user"]["surname"] ?>
+<ul>
+    <li><a href="account">Objednávky</a></li>
+    <li><a href="account?p=2">Úprava osobních údajů</a></li>
+    <li><a href="account?p=3">Změna hesla</a></li>
+    <li><a href="account?p=4" onclick="return confirm('Přejete si smazat účet? (akci nelze vrátit)')">Smazat účet</a></li>
+</ul>
+    </div>
+    
+    
+    <div class="profilePanel" style="margin-left:20%;">
+       <!-- SHOW DETAIL OF AN ORDER -->
+        <?php if(isset($_GET["p"]) && $_GET["p"] == 1 && $order): ?>
+        
+        <div id="orderDetail">
+        <h2>Detail objednávky č.<?= $order["idOrder"] ?></h2>
+        <hr>
+        <h3 style="padding-top: 10px;"><?= $order["status"] ?></h3>
+        <hr>
+        Číslo: <?= $order["idOrder"] ?><br>
+        Datum vytvoření: <?= $order["created_at"] ?><br>
+        <?= $order["address"] ?><br>
+        Doprava: <?= $order["transport"] ?><br>
+        Platba: <?= $order["payment"] ?><br>
+        Cena celkem: <?= $order["price_sum"] ?>,- Kč<br>
+        <table>
+        <tr>
+            <th></th>
+            <th>Název</th>
+            <th>Platforma</th>
+            <th>Množství</th>
+            <th>Cena (bez DPH)</th>
+            <th>Cena</th>
+        </tr>
+        <?php foreach($products as $value): ?>
+        <tr>
+            <td><img src="imgs/<?= $value["image"]?>" alt="<?= $value["image"] ?>" width="50" height="80"></td>
+            <td><?= $value["name"] ?></td>       
+            <td><?= $value["platform"] ?></td>
+            <td><?= $value["amount"] ?></td>
+            <td><?= $value["price"] ?>,- Kč</td>
+            <td><?= $value["price_dph"] ?>,- Kč</td>
+        </tr>
+        <?php endforeach;?>
+        </table>
+        </div>  
+       <?php endif; ?>
+    </div>
+</div>

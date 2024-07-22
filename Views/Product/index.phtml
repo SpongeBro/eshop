@@ -1,0 +1,44 @@
+
+<div id="productDiv">
+    <div style="float:left;"><img src="imgs/<?= $game["image"] ?>" alt="<?= $game["image"] ?>"
+              width="220" height="280"></div>
+    <div id="productInfo">
+        <div><strong><?= $game["name"] ?> (<?= $game["platform"] ?>)</strong></div>
+    <div>Žánr: <?= $game["genre"] ?></div>
+    <div>Typ hry: <?= $game["game_type"] ?></div>
+    <?php if($game["stock"] > 0 && $game["stock"] > 10): ?>
+    <div style="color:green">Skladem (>10ks)</div>
+    <?php elseif ($game["stock"] > 0): ?>
+    <div style="color:green">Skladem (<?= $game["stock"] ?>ks)</div>
+    <?php else: ?>
+    <div style="color:red">Není skladem</div>
+    <?php endif;?>
+    <div>Cena: <?= $game["price_dph"] ?>,- Kč</div>
+    <div>(<?= $game["price"] ?>,- Kč bez DPH)</div>
+    <?php if ($game["stock"] > 0): ?>
+    <a href="cart/add/<?= $game["url"] ?>" class="button" id="buyButton" style="height:40px;padding: 0.6em;margin-top: 10px;width: 130px;height: 45px;">Koupit</a>
+    <?php endif; ?>    
+    </div>
+    <div class="clear"></div>
+    </div>
+<div id="productDesc">
+    <?= $_game["description"] ?>
+</div>
+<div class="clear"></div>
+    <?php if($bought && !$commented): ?>
+    <div id="reviewForm">
+    <form method="post" action="product/addComment/<?= $game["url"] ?>">
+        <textarea id="commentArea" name="text" rows="5" cols="50" placeholder="Přidejte komentář..."></textarea><br>
+        <input class="button-medium" type="submit" value="Odeslat">
+    </form>
+    </div>
+    <?php endif; ?>
+    <?php if ($comments): ?>
+    <div id="comments">
+    <h3>Recenze uživatelů:</h3>
+    <?php foreach($comments as $value): ?>
+    <br><div><b><?= $value["user"] ?>:</b> <?= $value["text"] ?></div>
+    <small><?= $value["date"] ?></small><br>
+    <?php endforeach; ?>
+    </div>
+    <?php endif; ?>
